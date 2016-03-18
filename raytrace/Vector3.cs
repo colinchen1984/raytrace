@@ -94,12 +94,7 @@ namespace raytrace
 
 		public float SqrtLength()
 		{
-			float ret = 0;
-			for (int i = 0; i < data.Length; i++)
-			{
-				ret += data[i]*data[i];
-			}
-			return ret;
+			return this.Dot(this);
 		}
 
 		public override string ToString()

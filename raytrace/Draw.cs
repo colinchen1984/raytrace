@@ -16,19 +16,19 @@ namespace raytrace
 			this.path = path;
 		}
 
-		public void Draw(int x, int y, byte R, byte G, byte B, byte A)
-		{
-			dest.SetPixel(x, y, Color.FromArgb(A, R, G, B));
-		}
-
 		public void Draw(int x, int y, Color color)
 		{
-			dest.SetPixel(x, y, color);
+			Draw(x, y, color.ToSystemColor());
+		}
+
+		public void Draw(int x, int y, System.Drawing.Color color)
+		{
+			dest.SetPixel(x, dest.Height - 1 - y, color);
 		}
 
 		public void Dispose()
 		{
-			dest.Save(path, ImageFormat.Png);
+			dest.Save(path, ImageFormat.Bmp);
 			dest.Dispose();
 		}
 	}

@@ -6,12 +6,12 @@ namespace raytrace
 	{
 		static void Main(string[] args)
 		{
-			var camera = new PerspectiveCamera(new Vector3(0.0f, 0.0f, -100.0f), 
+			var camera = new PerspectiveCamera(new Vector3(0.0f, 0.0f, -1.0f), 
 				new Vector3(0.0f, 1.0f, 0.0f), 
 				new Vector3(0.0f, 0.0f, 1f), 
 				90.0f);
-			
-			var sphere = new Sphere(new Vector3(0.0f, 0.0f, 10), 3.0f);
+
+			var sphere = new Sphere(new Vector3(0.0f, 0.0f, 5), 3.0f, Material.DiffuseMaterial(Color.Withe), Color.Red);
 
 			var paiter = new DrawPaint(1024, 1024, "test.png");
 			
@@ -22,14 +22,14 @@ namespace raytrace
 				{
 					float fx = ((float)x) / 1024.0f;
 					var ray = camera.GenerateRays(fx, fy);
-					Vector3 t;
+					HitResult t;
 					if (sphere.Intersection(ray, out t))
 					{
-						paiter.Draw(x, y, Color.Black);
+						paiter.Draw(x, y, t.Color);
 					}
 					else
 					{
-						paiter.Draw(x, y, Color.White);
+						paiter.Draw(x, y, System.Drawing.Color.Black);
 					}
 				}
 			}
