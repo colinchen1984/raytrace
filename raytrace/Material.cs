@@ -16,8 +16,9 @@ namespace raytrace
 
 		private Color DiffuseShader(Vector3 postion, Vector3 normal, ILight light, Color tintColor, Color color)
 		{
-			float cosAngel = light.Direction.Dot(normal);
-			Color ret = color + light.Color * cosAngel;
+			float cosAngel =light.Direction.Dot(normal);
+			cosAngel = Math.Max(cosAngel, 0.0f);
+			Color ret = color * light.Color * cosAngel;
 			return ret;
 		}
 

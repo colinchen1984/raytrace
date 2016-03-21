@@ -10,7 +10,7 @@
 	{
 		public DirectionalLigh(Vector3 dir, Color color)
 		{
-			this.Direction = dir;
+			this.Direction = dir.Normalize();
 			this.Color = color;
 		}
 

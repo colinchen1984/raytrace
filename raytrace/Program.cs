@@ -11,7 +11,8 @@ namespace raytrace
 				new Vector3(0.0f, 0.0f, 1f), 
 				90.0f);
 
-			var sphere = new Sphere(new Vector3(0.0f, 0.0f, 5), 3.0f, Material.DiffuseMaterial(Color.Withe), Color.Red);
+			var sphere = new Sphere(new Vector3(0.0f, 0.0f, 5), 3.0f, 
+				Material.DiffuseMaterial(Color.Red), Color.Blue);
 
 			var paiter = new DrawPaint(1024, 1024, "test.png");
 			

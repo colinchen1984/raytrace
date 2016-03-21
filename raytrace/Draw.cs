@@ -23,6 +23,8 @@ namespace raytrace
 
 		public void Draw(int x, int y, System.Drawing.Color color)
 		{
+			//图片以左上角为原点
+			//3D场景中最后光栅化后以左下角为原点,所以需要对Y轴进行反转
 			dest.SetPixel(x, dest.Height - 1 - y, color);
 		}
 

@@ -60,7 +60,7 @@ namespace raytrace
 			return true;
 		}
 
-		static ILight light = new DirectionalLigh(new Vector3(0.0f, 0.0f, -1.0f), Color.Withe);
+		static ILight light = new DirectionalLigh(new Vector3(1.0f, 1.0f, -1.0f), Color.White);
 
 		protected override Color CaculatePointColor(Vector3 postion)
 		{

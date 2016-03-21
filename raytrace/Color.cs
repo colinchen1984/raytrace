@@ -24,7 +24,7 @@ namespace raytrace
 			get { return new Color(0.0f, 0.0f, 1.0f, 1.0f); }
 		}
 
-		public static Color Withe
+		public static Color White
 		{
 			get { return new Color(1.0f, 1.0f, 1.0f, 1.0f); }
 		}
@@ -47,25 +47,25 @@ namespace raytrace
 		public float r
 		{
 			get { return color[rShift]; }
-			set { color[rShift] = Math.Max(value, 0.0f); }
+			set { color[rShift] = value; }
 		}
 
 		public float g
 		{
 			get { return color[gShift]; }
-			set { color[gShift] = Math.Max(value, 0.0f); }
+			set { color[gShift] = value; }
 		}
 
 		public float b
 		{
 			get { return color[bShift]; }
-			set { color[bShift] = Math.Max(value, 0.0f); }
+			set { color[bShift] = value; }
 		}
 
 		public float a
 		{
 			get { return color[aShift]; }
-			set { color[aShift] = Math.Max(value, 0.0f); }
+			set { color[aShift] = value; }
 		}
 
 		public System.Drawing.Color ToSystemColor()
@@ -81,7 +81,7 @@ namespace raytrace
 			Color ret = Color.Black;
 			for (int i = 0; i < ret.color.Length; ++i)
 			{
-				ret.color[i] = Math.Max(c1.color[i]*c2.color[i], 0.0f);
+				ret.color[i] = c1.color[i]*c2.color[i];
 			}
 			return ret;
 		}
@@ -96,7 +96,7 @@ namespace raytrace
 			Color ret = Color.Black;
 			for (int i = 0; i < ret.color.Length; ++i)
 			{
-				ret.color[i] = Math.Max(c1.color[i] * c2, 0.0f);
+				ret.color[i] = c1.color[i] * c2;
 			}
 			return ret;
 		}
@@ -106,7 +106,7 @@ namespace raytrace
 			Color ret = Color.Black;
 			for (int i = 0; i < ret.color.Length; ++i)
 			{
-				ret.color[i] = Math.Max(c1.color[i] + c2.color[i], 0.0f);
+				ret.color[i] =c1.color[i] + c2.color[i];
 			}
 			return ret;
 		}
