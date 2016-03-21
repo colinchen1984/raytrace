@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace raytrace
 {
 	public interface ISurceface
 	{
-		bool Intersection(Ray ray, out HitResult intersection);
+		HitResult Intersection(Ray ray);
 
 		Material Mat { set; }
+
+		Color CaculatePointColor(Camera camera, Vector3 postion, IList<ILight> lights);
 	}
 
 	public abstract class Surceface : ISurceface
@@ -15,18 +18,17 @@ namespace raytrace
 
 		protected Color color;
 
-		public Surceface(Vector3 position, Material mat, Color color)
+		protected Surceface(Vector3 position, Material mat, Color color)
 		{
 			this.Mat = mat;
 			this.postion = position;
 			this.color = color;
 		}
-
-		public abstract bool Intersection(Ray ray, out HitResult intersection);
+		public abstract HitResult Intersection(Ray ray);
 
 		public Material Mat { set; get; }
 
-		protected abstract Color CaculatePointColor(Vector3 postion);
+		public abstract Color CaculatePointColor(Camera camera, Vector3 postion, IList<ILight> lights);
 	}
 
 	public class Sphere : Surceface
@@ -41,7 +43,7 @@ namespace raytrace
 		}
 
 		//http://www.cnblogs.com/miloyip/archive/2010/03/29/1698953.html
-		public override bool Intersection(Ray ray, out HitResult intersection)
+		public override HitResult Intersection(Ray ray)
 		{
 			var v = ray.Position - this.postion;
 			float DdotV = ray.Direction.Dot(v);
@@ -49,22 +51,18 @@ namespace raytrace
 			var discr = DdotV * DdotV - a0;
 			if (discr < 0.0f)
 			{
-				intersection = null;
-				return false;
+				return null;
 			}
 
 			float distence = (float) (-DdotV - Math.Sqrt(discr));
 			var hitPosition = ray.GetPoint(distence);
-			var surfacePixelColor = CaculatePointColor(hitPosition);
-			intersection = new HitResult(hitPosition, this, distence, surfacePixelColor);
-			return true;
+			var ret = new HitResult(hitPosition, this, distence);
+			return ret;
 		}
 
-		static ILight light = new DirectionalLigh(new Vector3(1.0f, 1.0f, -1.0f), Color.White);
-
-		protected override Color CaculatePointColor(Vector3 postion)
+		public override Color CaculatePointColor(Camera camera, Vector3 postion, IList<ILight> lights)
 		{
-			return Mat.CaculateColor(postion, (postion - this.postion).Normalize(), light, color);
+			return Mat.CaculateColor(camera, postion, (postion - this.postion).Normalize(), lights, color);
 		}
 	}
 }

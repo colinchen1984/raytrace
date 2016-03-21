@@ -8,14 +8,13 @@
 
 		public float DistenceToRaySource { get; private set; }
 
-		public Color Color { get; private set; }
+		public Color Color { get; set; }
 
-		public HitResult(Vector3 hitPostion, ISurceface hitSurceface, float distenceToRaySource, Color color)
+		public HitResult(Vector3 hitPostion, ISurceface hitSurceface, float distenceToRaySource)
 		{
 			this.HitPostion = hitPostion;
 			this.HitSurceface = hitSurceface;
 			this.DistenceToRaySource = distenceToRaySource;
-			this.Color = color;
 		}
 	}
 }

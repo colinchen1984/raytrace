@@ -68,6 +68,21 @@ namespace raytrace
 			return c1*c2;
 		}
 
+		public static Vector3 operator +(float c2, Vector3 c1)
+		{
+			return c1 + c2;
+		}
+
+		public static Vector3 operator +(Vector3 c1, float c2)
+		{
+			var ret = new Vector3(c1.x, c1.y, c1.z);
+			for (int i = 0; i < ret.data.Length; ++i)
+			{
+				ret.data[i] += c2;
+			}
+			return ret;
+		}
+
 		public Vector3 Cross(Vector3 other)
 		{
 			float x = data[1]*other.data[2] - data[2]*other.data[1];

@@ -4,21 +4,21 @@ namespace raytrace
 {
 	public abstract class Camera
 	{
-		protected Vector3 position;
+		public Vector3 Position { get; private set; }
 
-		protected Vector3 up;
+		public Vector3 Up { get; private set; }
 
-		protected Vector3 direction;
+		public Vector3 Direction { get; private set; }
 
-		protected Vector3 right;
+		public Vector3 Right { get; private set; }
 
 
 		protected Camera(Vector3 position, Vector3 up, Vector3 lookAt)
 		{
-			this.position = position;
-			this.up = up.Normalize();
-			this.direction = (lookAt - position).Normalize();
-			this.right = this.up.Cross(this.direction).Normalize();
+			this.Position = position;
+			this.Up = up.Normalize();
+			this.Direction = (lookAt - position).Normalize();
+			this.Right = this.Up.Cross(this.Direction).Normalize();
 		}
 
 		public abstract Ray GenerateRays(float x, float y);

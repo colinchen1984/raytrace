@@ -14,10 +14,10 @@ namespace raytrace
 
 		public override Ray GenerateRays(float x, float y)
 		{
-			var u = right*fovTangle*(2.0f*x - 1);
-			var v = up*fovTangle*(2.0f*y - 1);
-			var dir = this.direction + u + v;
-			return new Ray(position, dir);
+			var u = Right*fovTangle*(2.0f*x - 1);
+			var v = Up*fovTangle*(2.0f*y - 1);
+			var dir = this.Direction + u + v;
+			return new Ray(Position, dir);
 		}
 	}
 }

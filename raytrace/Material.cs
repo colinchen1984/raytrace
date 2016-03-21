@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.Collections.Generic;
 
 namespace raytrace
 {
@@ -7,18 +8,26 @@ namespace raytrace
 	{
 		private Color tintColor = Color.Black;
 
-		public Func<Vector3, Vector3, ILight, Color, Color, Color> FakeShader = null;
+		public Func<Camera, Vector3, Vector3, IList<ILight>, Color, Color, Color> FakeShader = null;
  
-		public Color CaculateColor(Vector3 postion, Vector3 normal, ILight light, Color color)
+		public Color CaculateColor(Camera camera, Vector3 postion, Vector3 normal, IList<ILight> lights, Color color)
 		{
-			return FakeShader(postion, normal, light, tintColor, color);
+			return FakeShader(camera, postion, normal, lights, tintColor, color);
 		}
 
-		private Color DiffuseShader(Vector3 postion, Vector3 normal, ILight light, Color tintColor, Color color)
+		private Color DiffuseShader(Camera camera, Vector3 postion, Vector3 normal, IList<ILight> lights, Color tintColor, Color color)
 		{
-			float cosAngel =light.Direction.Dot(normal);
-			cosAngel = Math.Max(cosAngel, 0.0f);
-			Color ret = color * light.Color * cosAngel;
+			var ret = Color.Black;
+			foreach (var light in lights)
+			{
+				float cosAngel = light.Direction.Dot(normal);
+				cosAngel = Math.Max(cosAngel, 0.0f);
+				ret += light.Color * cosAngel;	
+
+			}
+			ret *= color;
+			//var t = 0.5f + normal*0.5f;
+			//ret = new Color(t.x, t.y, t.z, 1.0f);
 			return ret;
 		}
 
