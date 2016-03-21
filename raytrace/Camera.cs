@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace raytrace
 {
 	public abstract class Camera
