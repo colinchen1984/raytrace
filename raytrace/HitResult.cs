@@ -10,6 +10,8 @@
 
 		public Color Color { get; set; }
 
+		public bool Hit { get { return null != HitSurceface; } }
+
 		public HitResult(Vector3 hitPostion, ISurceface hitSurceface, float distenceToRaySource)
 		{
 			this.HitPostion = hitPostion;

@@ -9,8 +9,15 @@ namespace raytrace
 		private Bitmap dest = null;
 
 		private string path = null;
+
+		public readonly int Width;
+
+		public readonly int Hight;
+
 		public DrawPaint(int width, int hight, string path)
 		{
+			Width = width;
+			Hight = hight;
 			dest = new Bitmap(width, hight);
 			this.path = path;
 		}

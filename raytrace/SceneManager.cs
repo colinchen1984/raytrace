@@ -24,11 +24,6 @@ namespace raytrace
 			foreach (var surceface in surcefacesList)
 			{
 				var hitRet = surceface.Intersection(ray);
-				if (null == hitRet)
-				{
-					continue;
-				}
-
 				if (null == ret ||
 				    hitRet.DistenceToRaySource < ret.DistenceToRaySource)
 				{
@@ -36,11 +31,10 @@ namespace raytrace
 				}
 			}
 
-			if (null == ret)
+			if (ret.Hit)
 			{
-				return ret;
+				ret.Color = ret.HitSurceface.CaculatePointColor(camera, ret.HitPostion, lightsList);
 			}
-			ret.Color = ret.HitSurceface.CaculatePointColor(camera, ret.HitPostion, lightsList);
 			return ret;
 		}
 	}

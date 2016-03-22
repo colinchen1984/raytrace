@@ -14,10 +14,11 @@ namespace raytrace
 
 		protected Camera(Vector3 position, Vector3 up, Vector3 lookAt)
 		{
-			this.Position = position;
-			this.Up = up.Normalize();
-			this.Direction = (lookAt - position).Normalize();
-			this.Right = this.Up.Cross(this.Direction).Normalize();
+			Position = position;
+			Up = up.Normalize();
+			Direction = (lookAt - position).Normalize();
+			Right = Up.Cross(Direction).Normalize();
+
 		}
 
 		public abstract Ray GenerateRays(float x, float y);

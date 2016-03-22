@@ -51,7 +51,9 @@ namespace raytrace
 			var discr = DdotV * DdotV - a0;
 			if (discr < 0.0f)
 			{
-				return null;
+				var result = new HitResult(new Vector3(), null, Single.MaxValue);
+				result.Color = Color.Black;
+				return result;
 			}
 
 			float distence = (float) (-DdotV - Math.Sqrt(discr));
